@@ -1,22 +1,9 @@
-CC := gcc
-LIB_DIRECTORY := -L/usr/lib/arm-linux-gnueabihf
-INC_DIRECTORY := -I/usr/include/bluetooth
-LIB := /usr/lib/arm-linux-gnueabihf/libbluetooth.a
-CFLAGS := -Wall -fPIC
+CFLAGS=$(shell pkg-config --cflags bluez)
+CFLAGS+=-Wall -O2
 
-.c.o:
-	$(CC) $(INC_DIRECTORY) $(CFLAGS) -c $<
+LDFLAGS=$(shell pkg-config --libs bluez)
 
-all:
-	make tool
-	make lib
-
-tool:   bletool.o
-	gcc -o bletool $(INC_DIRECTORY) $(LIB_DIRECTORY) $< -lbluetooth
-
-lib:    bletool.o
-	gcc $(CFLAGS) -shared -o libbletool.so $< $(LIB)
-	install -m 644 libbletool.so ../
+bletool: bletool.o
 
 clean:
-	rm -f bletool bletool.o libbletool.o libbletool.so
+	rm -f bletool.o bletool

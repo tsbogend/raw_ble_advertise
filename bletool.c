@@ -11,9 +11,9 @@
 #include <getopt.h>
 #include <sys/poll.h>
 #include <sys/socket.h>
-#include <bluetooth.h>
-#include <hci.h>
-#include <hci_lib.h>
+#include <bluetooth/bluetooth.h>
+#include <bluetooth/hci.h>
+#include <bluetooth/hci_lib.h>
 
 #define DEVICE_NAME   "hci0"
 #define DEFAULT_ADV_HEADER "1F0201060303AAFE1716AAFE80"
